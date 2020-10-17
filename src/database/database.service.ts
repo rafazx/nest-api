@@ -6,13 +6,14 @@ import requireDir = require('require-dir');
 export class DatabaseService { 
 
     async createConnection(): Promise<void> {
+        const {DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE, DB_PORT } = process.env;
         const sequelize = new Sequelize({
             dialect: 'mysql',
-            host: 'localhost',
-            port: 3306,
-            username: 'root',
-            password: 'root',
-            database: 'desafio-nest',
+            host: DB_HOST,
+            port: parseInt(DB_PORT),
+            username: DB_USERNAME,
+            password: DB_PASSWORD,
+            database: DB_DATABASE,
           });
         sequelize.addModels([requireDir('../model/')])
         await sequelize.sync();

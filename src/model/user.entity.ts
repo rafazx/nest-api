@@ -1,11 +1,13 @@
 
-import { Table, Column, Model } from 'sequelize-typescript';
+import { Table, Column, Model, HasMany } from 'sequelize-typescript';
+import { FeedBack } from './feedBack.entity';
 
 @Table
 export class User extends Model<User> {
     
     @Column({
-        primaryKey:true
+        primaryKey:true,
+        autoIncrement:true
     })
     user_id: string;
 
@@ -15,6 +17,6 @@ export class User extends Model<User> {
     @Column
     password: number;
 
-    @Column
-    feedBack_id: number;
+    @HasMany(() => FeedBack, 'user_id')
+    feedBack: FeedBack[];
 }

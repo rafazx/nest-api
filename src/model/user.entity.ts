@@ -1,22 +1,24 @@
 
 import { Table, Column, Model, HasMany } from 'sequelize-typescript';
-import { FeedBack } from './feedBack.entity';
+import { FeedBackEntity } from './feedBack.entity';
 
-@Table
-export class User extends Model<User> {
-    
+@Table({tableName: 'User'})
+export class UserEntity extends Model<UserEntity> {
     @Column({
         primaryKey:true,
         autoIncrement:true
     })
-    user_id: string;
+    user_id: number;
 
     @Column
     login: string;
 
     @Column
-    password: number;
+    password: string;
 
-    @HasMany(() => FeedBack, 'user_id')
-    feedBack: FeedBack[];
+    @HasMany(() => FeedBackEntity, 'userReceived_id')
+    feedBackRecived: FeedBackEntity[];
+    
+    @HasMany(() => FeedBackEntity, 'userSender_id')
+    feedBackSend: FeedBackEntity[];
 }

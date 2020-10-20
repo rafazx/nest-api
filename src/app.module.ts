@@ -1,10 +1,11 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
-import { LoginModule } from './login/login.module';
 import { DatabaseModule } from './database/database.module';
 import { ConfigModule } from '@nestjs/config';
+import { FeedBackModule } from './feedBack/feed-back.module';
+import { FeedBackController } from './feedBack/feed-back.controller';
+import { AuthModule } from './auth/auth.module';
 
 
 
@@ -12,9 +13,12 @@ import { ConfigModule } from '@nestjs/config';
   imports: [
     ConfigModule.forRoot(),
     UserModule, 
-    LoginModule, 
-    DatabaseModule],
-  controllers: [AppController],
+    DatabaseModule, 
+    FeedBackModule, 
+    AuthModule
+  ],
+  controllers: [
+  ],
   providers: [AppService],
 })
 export class AppModule {}

@@ -1,22 +1,29 @@
 
 import { Table, Column, Model, HasMany, ForeignKey, BelongsTo } from 'sequelize-typescript';
-import { User } from './user.entity';
+import { UserEntity } from './user.entity';
 
-@Table
-export class FeedBack extends Model<FeedBack> {
-    
+@Table({tableName: 'FeedBack'})
+export class FeedBackEntity extends Model<FeedBackEntity> {
+
     @Column({
         primaryKey:true,
         autoIncrement: true
     })
-    fB_id: string;
+    fb_id: number;
 
-    @ForeignKey(() => User)
+    @ForeignKey(() => UserEntity)
     @Column
-    user_id: number;
+    userReceived_id: number;
 
-    @BelongsTo(() => User, 'user_id')
-    user: User;
+    @ForeignKey(() => UserEntity)
+    @Column
+    userSender_id: number;
+
+    @BelongsTo(() => UserEntity, 'userReceived_id')
+    userReceived: UserEntity;
+
+    @BelongsTo(() => UserEntity, 'userSender_id')
+    userSender: UserEntity;
 
     @Column
     data: Date;
